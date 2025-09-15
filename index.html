@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeplate - Web</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+        :root {
+            --primary-color: #6b46c1;
+            --accent-color: #39f139;
+            --text-color: #ffffff;
+            --dark-space: #0a0a2a;
+            --nebula-purple: #4a2c82;
+            --nebula-blue: #183895;
+            --card-bg: rgba(20, 20, 40, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, var(--dark-space), var(--nebula-purple), var(--nebula-blue));
+            color: var(--text-color);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Space background elements */
+        .space-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle linear infinite;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .comet {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+            animation: comet linear infinite;
+            transform-origin: left;
+        }
+
+        @keyframes comet {
+            0% {
+                transform: translate(0, 0) rotate(45deg) scaleX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(300px, 300px) rotate(45deg) scaleX(50);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            background-color: rgba(10, 10, 42, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo h1 {
+            font-size: 2.2rem;
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            text-shadow: 0 0 10px var(--accent-color);
+            letter-spacing: 1px;
+        }
+
+        .links ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .links li a {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .links li a:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 8px var(--accent-color);
+        }
+
+        .links li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .links li a:hover::after {
+            width: 70%;
+        }
+
+        .active {
+            color: var(--accent-color) !important;
+            text-shadow: 0 0 8px var(--accent-color);
+        }
+
+        .active::after {
+            width: 70% !important;
+        }
+
+        .login-sec button {
+            border: 2px solid var(--accent-color);
+            background-color: transparent;
+            border-radius: 8px;
+            padding: 10px 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-shadow: 0 0 5px var(--accent-color);
+            box-shadow: 0 0 10px rgba(57, 241, 57, 0.3);
+        }
+
+        .login-sec button:hover {
+            background-color: var(--accent-color);
+            color: #000;
+            box-shadow: 0 0 15px rgba(57, 241, 57, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* Hero content */
+        .home-content {
+            padding: 3rem 5%;
+            display: flex;
+            align-items: center;
+            min-height: 85vh;
+            position: relative;
+        }
+
+        .home-container {
+            width: 100%;
+            max-width: 650px;
+            z-index: 2;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .home-container h1 {
+            color: #fff;
+            font-size: 3.5rem;
+            font-family: 'Orbitron', sans-serif;
+            padding-bottom: 1.5rem;
+            text-shadow: 0 0 15px var(--accent-color);
+            line-height: 1.2;
+        }
+
+        .home-container p {
+            color: rgba(255, 255, 255, 0.9);
+            padding-bottom: 2.5rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .home-container button {
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            margin-right: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #try-now {
+            background: linear-gradient(135deg, var(--primary-color), #2a1263);
+            color: white;
+            box-shadow: 0 4px 15px rgba(107, 70, 193, 0.4);
+        }
+
+        #try-now:hover {
+            background: linear-gradient(135deg, #7c5acf, #39248a);
+            box-shadow: 0 6px 20px rgba(107, 70, 193, 0.6);
+            transform: translateY(-3px);
+        }
+
+        #explore {
+            background-color: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            text-shadow: 0 0 5px var(--accent-color);
+            box-shadow: 0 0 10px rgba(57, 241, 57, 0.3);
+        }
+
+        #explore:hover {
+            background-color: var(--accent-color);
+            color: #000;
+            box-shadow: 0 0 15px rgba(57, 241, 57, 0.6);
+            transform: translateY(-3px);
+        }
+
+        /* Floating planets */
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+            z-index: 1;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        .planet-1 {
+            width: 150px;
+            height: 150px;
+            right: 10%;
+            top: 20%;
+            background: radial-gradient(circle at 30% 30%, #6b46c1, #4a2c82);
+            box-shadow: 0 0 30px rgba(107, 70, 193, 0.6);
+        }
+
+        .planet-2 {
+            width: 100px;
+            height: 100px;
+            right: 25%;
+            top: 60%;
+            background: radial-gradient(circle at 30% 30%, #39f139, #2a8c2a);
+            box-shadow: 0 0 30px rgba(57, 241, 57, 0.6);
+            animation-delay: 1s;
+        }
+
+        /* Responsive design */
+        @media (max-width: 992px) {
+            .home-container h1 {
+                font-size: 3rem;
+            }
+
+            .planet-1 {
+                width: 120px;
+                height: 120px;
+                right: 5%;
+            }
+
+            .planet-2 {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 5%;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .links ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .home-content {
+                padding: 2rem 5%;
+                text-align: center;
+            }
+
+            .home-container h1 {
+                font-size: 2.5rem;
+            }
+
+            .planet-1,
+            .planet-2 {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .home-container h1 {
+                font-size: 2rem;
+            }
+
+            .home-container p {
+                font-size: 1rem;
+            }
+
+            .home-container button {
+                display: block;
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            #explore {
+                margin-left: 0;
+            }
+
+            .links ul {
+                gap: 0.5rem;
+            }
+
+            .links li a {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Space background -->
+    <div class="space-bg" id="space-bg"></div>
+
+    <!-- Floating planets -->
+    <div class="planet planet-1"></div>
+    <div class="planet planet-2"></div>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Timeplate</h1>
+            </div>
+            <div class="links">
+                <ul>
+                    <li><a class="active" href="#">Home</a></li>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Tools</a></li>
+                </ul>
+            </div>
+
+            <div class="login-sec">
+                <a href="login.html">
+                    <button>Login</button>
+                </a>
+            </div>
+        </nav>
+
+        <div class="home-content">
+            <div class="home-container">
+                <h1>Make your operation easier</h1>
+                <p>Minimize time, work comfortably, and focus on what really matters!</p>
+                <button id="try-now">Contact us</button>
+                <button id="explore">More</button>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        // Create space background
+        function createSpaceBackground() {
+            const spaceBg = document.getElementById('space-bg');
+
+            // Create stars
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                const size = Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                spaceBg.appendChild(star);
+            }
+
+            // Create comets
+            for (let i = 0; i < 3; i++) {
+                const comet = document.createElement('div');
+                comet.classList.add('comet');
+                comet.style.left = `${Math.random() * 20}%`;
+                comet.style.top = `${Math.random() * 20}%`;
+                comet.style.animationDuration = `${Math.random() * 10 + 15}s`;
+                comet.style.animationDelay = `${Math.random() * 10}s`;
+                spaceBg.appendChild(comet);
+            }
+        }
+
+        // Initialize when page loads
+        window.addEventListener('load', createSpaceBackground);
+    </script>
+</body>
+
+</html>

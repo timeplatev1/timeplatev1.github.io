@@ -1,0 +1,356 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+/* Cambios del fondo */
+#main-container {
+    width: 100%;
+    height: 1000vh;
+    background-color: #0a2239;
+    display: flex;
+    flex-direction: column;
+}
+
+/* FIN de Cambios del fondo */
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #58595c;
+    color: white;
+    padding: 15px 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+#header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    border-bottom: 3px solid #4a90e2;
+    padding-bottom: 5px;
+}
+
+
+#add-box-btn {
+    font-size: px;
+    background-color: white;
+    color: #000000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+}
+
+#add-line-box-btn {
+    font-size: 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+#workspace {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.box {
+    width: 300px;
+    resize: none;
+    overflow: hidden;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    box-shadow: 0 5px 5px rgb(0, 0, 0);
+    position: absolute;
+    cursor: grab;
+    background-color: #a1a1a1;
+    border: 1px solid #ccc;
+}
+
+.line-box {
+    width: 250px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    padding: 10px;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    cursor: grab;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+}
+
+.box textarea {
+    resize: none;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 5px;
+    height: auto;
+    box-sizing: border-box;
+    background-color: #e9e7e7;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.line-box textarea {
+    resize: none;
+    overflow: hidden;
+    width: 100%;
+    height: 20px !important;
+    border: none;
+    background-color: inherit;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.box-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 7px;
+}
+
+.box button,
+.line-box button {
+    padding: 5px 10px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.box .copy-btn {
+    flex-grow: 1;
+    padding: 9px;
+    background-color: black;
+    color: white;
+    cursor: copy;
+}
+
+.box .delete-btn {
+    font-size: 12px;
+    background-color: red;
+    margin-left: 5px;
+    cursor: no-drop;
+}
+
+.box .lock-btn {
+    background-color: #f5cb8d;
+    color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-left: 5px;
+}
+
+.box .lock-btn.active {
+    background-color: #e0a847;
+}
+
+.line-box .color-btn {
+    background-color: #bfcfbf;
+    color: white;
+}
+
+.line-box .delete-btn {
+    background-color: #f77067;
+    color: white;
+}
+
+.line-box .lock-btn {
+    background-color: #f5cb8d;
+    color: white;
+}
+
+/* Selector de color profesional */
+.color-picker {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    width: 300px;
+    display: none;
+}
+
+.color-picker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.color-picker-header h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+#close-color-picker {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+}
+
+.color-spectrum {
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to top, #000, transparent),
+        linear-gradient(to right, #fff, transparent);
+    border-radius: 5px;
+    margin-bottom: 15px;
+    cursor: crosshair;
+    position: relative;
+}
+
+.color-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#custom-color {
+    width: 40px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+}
+
+.color-preview {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* Fondo oscuro cuando el selector está abierto */
+.color-picker-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+/* Color oscuro en boton de bloque de cuadros en linea*/
+.line-box .lock-btn.active {
+    background-color: #e0a847;
+}
+
+
+/* Animación glow al copiar */
+@keyframes neonGlow {
+    0% {
+        box-shadow: 0 0 0px white;
+    }
+
+    50% {
+        box-shadow: 0 0 20px white;
+    }
+
+    100% {
+        box-shadow: 0 0 0px white;
+    }
+}
+
+.box.glow {
+    animation: neonGlow 1s ease-out;
+}
+
+
+
+
+
+.locked {
+    cursor: default !important;
+}
+
+
+
+
+/*AJUSTES */
+
+/* Botón de ajustes */
+#settings-btn {
+    font-size: 25px;
+    background-color: #58595c;
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+
+    margin-right: 10px;
+}
+
+/* Menú desplegable */
+#settings-menu {
+    position: absolute;
+    background: #080e1f;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    z-index: 1000;
+}
+
+#settings-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#settings-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#settings-menu li:hover {
+    background: #2d4263;
+}
+
+
+
+/* Opciones de fondo */
+#background-options li {
+    font-size: 14px;
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#background-options li:hover {
+    background: #3a4b6b;
+}

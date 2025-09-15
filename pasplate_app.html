@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeplate-Pasplate</title>
+    <link rel="stylesheet" href="pas-styles.css">
+
+    <!-- Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Roboto Slab -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600&display=swap" rel="stylesheet">
+
+    <!-- Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="main-container">
+        <div id="header">
+            <h1>Pasplate</h1>
+            <div>
+                <button id="add-line-box-btn">+</button>
+                <button id="add-box-btn">+</button>
+            </div>
+        </div>
+        <div id="workspace"></div>
+
+        <!-- Selector de color profesional (oculto inicialmente) -->
+        <div id="color-picker" class="color-picker">
+            <div class="color-picker-header">
+                <h3>Seleccionar color</h3>
+                <button id="close-color-picker">×</button>
+            </div>
+            <div class="color-picker-body">
+                <div class="color-spectrum" id="color-spectrum"></div>
+                <div class="color-controls">
+                    <input type="color" id="custom-color" value="#ffffff">
+                    <div class="color-preview" id="color-preview"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="pas-script.js"></script>
+</body>
+
+</html>
