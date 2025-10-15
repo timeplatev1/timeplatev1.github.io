@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Remote-plate</title>
+    <link rel="stylesheet" href="remote_styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Remote-plate</h1>
+            <div class="header-controls">
+                <button id="sound-toggle" class="icon-btn" title="Toggle sounds">
+                    <img id="speaker-icon"
+                        src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='white'><path d='M3 10v4h4l5 5V5L7 10H3z'/></svg>"
+                        alt="speaker" />
+                </button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="phone-box">
+                <div class="phone-visual">
+                    <div class="phone-screen">
+                        <div id="pair-code" class="pair-code">—</div>
+                    </div>
+                </div>
+
+                <div class="phone-controls">
+                    <button id="start-btn" class="primary-btn">Start</button>
+                    <button id="connect-btn" class="primary-btn">Connect device</button>
+                    <button id="stop-btn" class="danger-btn">Stop</button>
+                </div>
+
+                <div class="connection-hint">
+                    <small id="connection-status">Not connected</small>
+                </div>
+            </section>
+
+            <section class="keypad">
+                <div class="key" data-key="1"><span class="key-number">1</span><span class="key-title">Name 1</span>
+                </div>
+                <div class="key" data-key="2"><span class="key-number">2</span><span class="key-title">Name 2</span>
+                </div>
+                <div class="key" data-key="3"><span class="key-number">3</span><span class="key-title">Name 3</span>
+                </div>
+                <div class="key" data-key="4"><span class="key-number">4</span><span class="key-title">Name 4</span>
+                </div>
+                <div class="key" data-key="5"><span class="key-number">5</span><span class="key-title">Name 5</span>
+                </div>
+                <div class="key" data-key="6"><span class="key-number">6</span><span class="key-title">Name 6</span>
+                </div>
+                <div class="key" data-key="7"><span class="key-number">7</span><span class="key-title">Name 7</span>
+                </div>
+                <div class="key" data-key="8"><span class="key-number">8</span><span class="key-title">Name 8</span>
+                </div>
+                <div class="key" data-key="9"><span class="key-number">9</span><span class="key-title">Name 9</span>
+                </div>
+                <div class="key" data-key="0"><span class="key-number">0</span><span class="key-title">Name 0</span>
+                </div>
+                <div class="key" data-key="10"><span class="key-number">10</span><span class="key-title">Name 10</span>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal para edición -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close-btn">&times;</span>
+            <h2>Editar botón</h2>
+            <input type="text" id="modal-input" placeholder="Nuevo título..." />
+            <h3>Descripción (texto a copiar)</h3>
+            <textarea id="modal-description"
+                placeholder="Escribe la descripción que se copiará al portapapeles..."></textarea>
+            <div style="text-align:right;margin-top:12px">
+                <button id="save-title" class="primary-btn">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para conectar (smartphone) -->
+    <div id="connect-modal" class="connect-modal" aria-hidden="true">
+        <div class="connect-content">
+            <div class="connect-header">
+                <h3>Connect to PC</h3>
+                <button id="connect-close" class="icon-close" title="Cerrar">&times;</button>
+            </div>
+
+            <div class="connect-body">
+                <label for="connect-code">Enter 4-digit code</label>
+                <input id="connect-code" type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="4"
+                    placeholder="1234" />
+                <div class="connect-actions">
+                    <button id="connect-confirm" class="primary-btn">Connect</button>
+                </div>
+
+                <div id="phone-keypad" class="phone-keypad" aria-hidden="true">
+                    <!-- keypad buttons for smartphone mode (0..10) -->
+                    <div class="pk-row">
+                        <button class="pk" data-key="1">1</button>
+                        <button class="pk" data-key="2">2</button>
+                        <button class="pk" data-key="3">3</button>
+                    </div>
+                    <div class="pk-row">
+                        <button class="pk" data-key="4">4</button>
+                        <button class="pk" data-key="5">5</button>
+                        <button class="pk" data-key="6">6</button>
+                    </div>
+                    <div class="pk-row">
+                        <button class="pk" data-key="7">7</button>
+                        <button class="pk" data-key="8">8</button>
+                        <button class="pk" data-key="9">9</button>
+                    </div>
+                    <div class="pk-row">
+                        <button class="pk special" id="pk-stop">STOP</button>
+                        <button class="pk" data-key="0">0</button>
+                        <button class="pk" data-key="10">10</button>
+                    </div>
+                </div>
+
+                <div id="phone-keypad-hint" class="hint">Tap a number to send it to the PC (it will be copied there).
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- feedback sound (optional) -->
+    <audio id="copy-sound" src="" preload="auto"></audio>
+
+    <script src="remote_script.js"></script>
+</body>
+
+</html>

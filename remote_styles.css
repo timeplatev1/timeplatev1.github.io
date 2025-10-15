@@ -1,0 +1,331 @@
+:root {
+    --bg: #070709;
+    --card: #111;
+    --accent: #00d1a1;
+    --muted: #9aa;
+    --danger: #d13f4a;
+    --glass: rgba(255, 255, 255, 0.03);
+    --glass-2: rgba(255, 255, 255, 0.02);
+    --radius: 12px;
+    --font: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    height: 100%
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(180deg, #050505, #0b0b0b);
+    color: #fff;
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* container */
+.container {
+    max-width: 980px;
+    margin: 18px auto;
+    padding: 12px
+}
+
+/* header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, #0f1112, #151617);
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700
+}
+
+.header-controls {
+    display: flex;
+    gap: 8px
+}
+
+.icon-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer
+}
+
+.icon-btn img {
+    width: 20px;
+    height: 20px
+}
+
+/* main */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+    margin-top: 14px
+}
+
+/* phone box */
+.phone-box {
+    width: 640px;
+    max-width: 95%;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center
+}
+
+.phone-screen {
+    width: 280px;
+    height: 140px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #070707, #121212);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.02)
+}
+
+.pair-code {
+    font-size: 28px;
+    color: var(--muted);
+    letter-spacing: 1px
+}
+
+/* controls */
+.phone-controls {
+    display: flex;
+    gap: 10px
+}
+
+.primary-btn {
+    background: var(--accent);
+    border: none;
+    padding: 10px 14px;
+    border-radius: 10px;
+    color: #04281f;
+    font-weight: 700;
+    cursor: pointer
+}
+
+.danger-btn {
+    background: var(--danger);
+    border: none;
+    padding: 10px 14px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer
+}
+
+/* hint */
+.connection-hint small {
+    color: var(--muted)
+}
+
+/* desktop keypad */
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-auto-rows: 90px;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 6px;
+    max-width: 95%
+}
+
+.key {
+    background: #1a1a1a;
+    border-radius: 12px;
+    color: #ddd;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    gap: 12px;
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .12s
+}
+
+.key-number {
+    background: #222;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 8px;
+    flex-shrink: 0
+}
+
+.key-title {
+    flex: 1;
+    text-align: left;
+    color: var(--muted);
+    font-weight: 600
+}
+
+.key.active {
+    border: 2px solid var(--accent);
+    box-shadow: 0 8px 30px rgba(0, 209, 161, 0.08)
+}
+
+/* modal common */
+.modal,
+.connect-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
+}
+
+.modal-content,
+.connect-content {
+    background: #121214;
+    border-radius: 14px;
+    padding: 16px;
+    width: 92%;
+    max-width: 520px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6)
+}
+
+.close-btn {
+    float: right;
+    font-size: 24px;
+    cursor: pointer
+}
+
+.modal-content input,
+.modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    background: #0e0e0f;
+    color: white;
+    margin-top: 8px
+}
+
+.modal-content textarea {
+    min-height: 90px;
+    resize: vertical
+}
+
+/* connect modal specifics */
+.connect-content .connect-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.connect-content label {
+    display: block;
+    margin-top: 6px;
+    color: var(--muted)
+}
+
+.connect-content input[type="tel"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    background: #0d0d0e;
+    color: white;
+    font-size: 18px;
+    margin-top: 8px
+}
+
+.connect-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 8px
+}
+
+/* phone keypad inside modal (responsive) */
+.phone-keypad {
+    margin-top: 14px;
+    display: none
+}
+
+.pk-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px
+}
+
+.pk {
+    flex: 1;
+    padding: 18px 8px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #131313, #161616);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5)
+}
+
+.pk:active {
+    transform: scale(.98)
+}
+
+.pk.special {
+    background: linear-gradient(180deg, var(--danger), #b02b35);
+    color: white
+}
+
+.hint {
+    color: var(--muted);
+    margin-top: 8px;
+    font-size: 13px;
+    text-align: center
+}
+
+/* mobile-specific: show keypad full screen for small widths */
+@media (max-width:520px) {
+    .connect-content {
+        max-width: 420px;
+        padding: 12px
+    }
+
+    .phone-keypad {
+        display: block
+    }
+
+    .modal-content {
+        max-width: 94%
+    }
+
+    .keypad {
+        display: none
+    }
+
+    /* hide desktop keypad on small devices to use phone keypad instead */
+}
+
+/* small visual helper for pressed */
+.pk.pressed {
+    background: linear-gradient(180deg, #0f5, #0a8);
+    color: #03140f
+}
