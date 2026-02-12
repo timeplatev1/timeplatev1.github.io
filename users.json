@@ -22,5 +22,11 @@
         "email": "bv@alliance.com",
         "name": "bv",
         "passwordHash": "$2b$12$TvPj6IEUY31H/a1rkQWtvuaXQ/c6NHkYXHR1j1ldP/ELBk0F5LvNK"
+    },
+    {
+        "id": 5,
+        "email": "truck@truckcompany.com",
+        "name": "test",
+        "passwordHash": "$2b$12$TvPj6IEUY31H/a1rkQWtvuaXQ/c6NHkYXHR1j1ldP/ELBk0F5LvNK"
     }
 ]
