@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="logo_v5.png">
+    <title>Timeplate - Home page</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        :root {
+            --main-green: #83a04b;
+            --dark-green: #1b2d0b;
+            --accent: #a1d34a;
+            --text-dark: #1e1e1e;
+            --text-light: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--main-green);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 4%;
+            background: var(--dark-green);
+            color: var(--text-light);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        nav .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav .logo img {
+            height: 38px;
+            width: 38px;
+        }
+
+        nav .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--main-green);
+        }
+
+        /* Indicador activo */
+        nav ul li a.active {
+            color: var(--main-green);
+            font-weight: 600;
+        }
+
+        nav ul li a.active::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 3px;
+            background: var(--main-green);
+            border-radius: 10px;
+        }
+
+        nav button {
+            border: 2px solid var(--main-green);
+            background-color: transparent;
+            color: var(--main-green);
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        nav button:hover {
+            background-color: var(--main-green);
+            color: var(--dark-green);
+        }
+
+        /* Secciones */
+        section {
+            min-height: 100vh;
+            padding: 140px 20px 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* Home */
+        .hero img {
+            width: 120px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--dark-green);
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #2f3b1f;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            border: none;
+            background-color: var(--dark-green);
+            color: var(--main-green);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent);
+            color: var(--dark-green);
+            transform: translateY(-2px);
+        }
+
+        /* About & Contact */
+        .about,
+        .contact {
+            background-color: #f4f7ef;
+            color: var(--dark-green);
+        }
+
+        .about h2,
+        .contact h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .about p,
+        .contact p {
+            max-width: 650px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* Glow */
+        .glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(80px);
+            z-index: -1;
+            animation: pulse 6s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.7;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Overlay transición - TRANSICIÓN PARA ANIMAR EL LOGO */
+        #page-transition {
+            position: fixed;
+            inset: 0;
+            background: rgba(27, 45, 11, 0.95);
+            z-index: 9999;
+            display: none;
+        }
+
+        #transition-logo {
+            position: fixed;
+            width: 38px;
+            pointer-events: none;
+            z-index: 10000;
+            transition: all 0.6s cubic-bezier(.4, 0, .2, 1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">
+            <img src="logo_v4.png" alt="Timeplate Logo">
+            <h1>Timeplate</h1>
+        </div>
+        <ul>
+            <li><a data-section="home" class="active">Home</a></li>
+            <li><a data-section="about">About</a></li>
+            <li><a data-section="contact">Contact</a></li>
+        </ul>
+        <button>Login</button>
+    </nav>
+
+    <!-- HOME -->
+    <section id="home" class="hero">
+        <img src="logo_v5.png" alt="Logo Principal" id="hero-logo">
+        <h1>Make your operation easier</h1>
+        <p>
+            Timeplate is your digital space to work comfortably,
+            stay productive, and enjoy a modern, fresh experience.
+        </p>
+        <div class="buttons">
+            <a href="tools.html">
+                <button class="btn-primary" id="startBtn">Start</button>
+            </a>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="about">
+        <h2>About Timeplate</h2>
+        <p>
+            Timeplate was designed to simplify workflows and centralize tools
+            in a clean, efficient, and visually friendly environment.
+        </p>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+        <h2>Contact</h2>
+        <p>
+            Want to collaborate or have questions?
+            Reach out and let’s build better digital experiences together.
+        </p>
+    </section>
+
+    <div class="glow"></div>
+
+    <!-- Función de sonido -->
+    <audio id="transitionSound" preload="auto">
+        <source src="transition.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const navLinks = document.querySelectorAll('nav ul li a');
+        const sections = document.querySelectorAll('section');
+        const navHeight = document.querySelector('nav').offsetHeight;
+
+        /* Scroll suave */
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const sectionId = link.dataset.section;
+                const section = document.getElementById(sectionId);
+                const y = section.getBoundingClientRect().top + window.pageYOffset - navHeight;
+
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            });
+        });
+
+        /* Indicador activo */
+        window.addEventListener('scroll', () => {
+            let current = '';
+
+            sections.forEach(sec => {
+                if (scrollY >= sec.offsetTop - navHeight - 50) {
+                    current = sec.id;
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.section === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        /* ============================
+           TRANSICIÓN A TOOLS
+        ============================ */
+
+        const startBtn = document.getElementById('startBtn');
+        const logo = document.getElementById('hero-logo');
+        //Agregar función de sonido 
+        const sound = document.getElementById('transitionSound');
+
+
+        // Overlay
+        const overlay = document.createElement('div');
+        overlay.id = 'page-transition';
+        document.body.appendChild(overlay);
+
+        startBtn.addEventListener('click', () => {
+
+            sound.currentTime = 0;
+            sound.volume = 0.7;
+            sound.play();
+
+            const rect = logo.getBoundingClientRect();
+
+            // Guardar datos
+            sessionStorage.setItem('logoTransition', JSON.stringify({
+                top: rect.top,
+                left: rect.left,
+                width: rect.width,
+                height: rect.height
+            }));
+
+            // Clon
+            const clone = logo.cloneNode(true);
+            clone.id = 'transition-logo';
+
+            clone.style.top = rect.top + 'px';
+            clone.style.left = rect.left + 'px';
+            clone.style.width = rect.width + 'px';
+
+            document.body.appendChild(clone);
+
+            // Mostrar overlay
+            overlay.style.display = 'block';
+
+            // Animación pequeña
+            setTimeout(() => {
+                clone.style.transform = 'scale(1.3)';
+            }, 50);
+
+            // Redirigir (esperar a que termine el sonido)
+            setTimeout(() => {
+                window.location.href = 'tools.html';
+            }, 1000);
+            ;
+        });
+    </script>
+
+
+</body>
+
+</html>
